@@ -1,10 +1,16 @@
+'use client';
+
 import { DownOutlined } from '@ant-design/icons';
 import { type MenuProps, Typography, Dropdown, Button, Space, Menu } from 'antd';
 import { Header } from 'antd/es/layout/layout';
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
-export const HeaderCharts = () => {
+interface Props {
+	title: string;
+}
+
+export const HeaderCharts = ({ title }: Props) => {
 	const download: MenuProps['onClick'] = (e) => {
 		const createEl = document.createElement('a');
 
@@ -39,7 +45,7 @@ export const HeaderCharts = () => {
 					How it works
 				</Link>
 			),
-			key: `${uuidv4()}`,
+			key: uuidv4(),
 		},
 		{
 			label: (
@@ -47,7 +53,7 @@ export const HeaderCharts = () => {
 					Privacy policy
 				</Link>
 			),
-			key: `${uuidv4()}`,
+			key: uuidv4(),
 		},
 		{
 			label: (
@@ -55,7 +61,7 @@ export const HeaderCharts = () => {
 					Charts
 				</Link>
 			),
-			key: `${uuidv4()}`,
+			key: uuidv4(),
 			children: [
 				{
 					label: (
@@ -63,7 +69,7 @@ export const HeaderCharts = () => {
 							Privacy policy1
 						</Link>
 					),
-					key: `${uuidv4()}`,
+					key: uuidv4(),
 				},
 				{
 					label: (
@@ -71,7 +77,7 @@ export const HeaderCharts = () => {
 							Privacy policy2
 						</Link>
 					),
-					key: `${uuidv4()}`,
+					key: uuidv4(),
 				},
 				{
 					label: (
@@ -79,7 +85,7 @@ export const HeaderCharts = () => {
 							Privacy policy3
 						</Link>
 					),
-					key: `${uuidv4()}`,
+					key: uuidv4(),
 				},
 			],
 		},
@@ -89,17 +95,17 @@ export const HeaderCharts = () => {
 					Contact us
 				</Link>
 			),
-			key: `${uuidv4()}`,
+			key: uuidv4(),
 		},
 	];
 
 	return (
 		<Header className="px-7 h-20 bg-white shadow-md flex items-center justify-between">
 			<Typography.Title level={1} className="text-2xl font-bold mb-0">
-				Bar Chart Online
+				{title}
 			</Typography.Title>
 			<nav className="flex gap-x-7 items-center">
-				<Menu forceSubMenuRender className="leading-[80px] min-w-[405px]" mode="horizontal" items={items2} />
+				<Menu className="leading-[80px] min-w-[405px]" mode="horizontal" items={items2} />
 				<Dropdown menu={menuProps}>
 					<Button type="primary" size="large">
 						<Space>

@@ -4,27 +4,27 @@ import { observer } from 'mobx-react-lite';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, ColorPicker, Form, Input, InputNumber, Popconfirm, Space, Switch, Typography } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
-import { LineChartStore } from '../../stores';
+import { BarChartStore } from '../../stores';
 
-export const LineChartForm = observer(() => {
+export const BarChartForm = observer(() => {
 	const { Text } = Typography;
 	const [form] = Form.useForm();
 
 	const initialValue = {
-		data: LineChartStore.chartValue.xAxis.data.map((item, index) => ({
+		data: BarChartStore.chartValue.xAxis.data.map((item, index) => ({
 			name: item,
-			series: LineChartStore.chartValue.series.data[index],
+			series: BarChartStore.chartValue.series.data[index],
 		})),
 	};
 
 	const getValue = () => {
 		const values = form.getFieldsValue();
 
-		LineChartStore.xLabel(
+		BarChartStore.xLabel(
 			values.data.map((item: { name: string }) => item?.name).filter((item: string) => item !== undefined),
 		);
 
-		LineChartStore.seriesData(
+		BarChartStore.seriesData(
 			values.data.map((item: { series: number }) => item?.series).filter((item: number) => item !== undefined),
 		);
 	};
@@ -52,7 +52,7 @@ export const LineChartForm = observer(() => {
 						<Switch
 							defaultChecked={false}
 							onChange={(e) => {
-								LineChartStore.showLabel(e);
+								BarChartStore.showLabel(e);
 							}}
 						/>
 					</Form.Item>
@@ -63,15 +63,15 @@ export const LineChartForm = observer(() => {
 						<InputNumber
 							max={30}
 							min={10}
-							disabled={!LineChartStore.chartValue.series.label.show}
+							disabled={!BarChartStore.chartValue.series.label.show}
 							onChange={(e) => {
-								LineChartStore.labelFontSize(e as number);
+								BarChartStore.labelFontSize(e as number);
 							}}
 							placeholder="Font size"
 						/>
 					</Form.Item>
 				</Space>
-				<Space className="flex justify-between w-full mt-4">
+				{/* <Space className="flex justify-between w-full mt-4">
 					<Text className="text-white text-base">Line width: </Text>
 					<Form.Item name="lineWidth" className="mb-0">
 						<InputNumber
@@ -79,19 +79,19 @@ export const LineChartForm = observer(() => {
 							min={1}
 							value={2}
 							onChange={(e) => {
-								LineChartStore.lineWidth(e as number);
+								BarChartStore.lineWidth(e as number);
 							}}
 							placeholder="Line width"
 						/>
 					</Form.Item>
-				</Space>
+				</Space> */}
 				<Space className="flex justify-between w-full mt-4">
 					<Text className="text-white text-base">Line color: </Text>
 					<Form.Item name="lineColor" labelAlign="right" className="mb-0">
 						<ColorPicker
-							value={LineChartStore.chartValue.series.itemStyle.color}
+							value={BarChartStore.chartValue.series.itemStyle.color}
 							onChange={(e) => {
-								LineChartStore.lineColor(e);
+								BarChartStore.lineColor(e);
 							}}
 							disabledAlpha
 						/>
@@ -141,7 +141,7 @@ export const LineChartForm = observer(() => {
 				title="Reset this data"
 				description="Are you sure you want to reset this information?"
 				onConfirm={() => {
-					LineChartStore.reset();
+					BarChartStore.reset();
 					onReset();
 				}}
 				okText="Yes"

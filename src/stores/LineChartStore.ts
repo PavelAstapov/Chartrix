@@ -34,6 +34,9 @@ class LineChart {
 				show: false,
 				fontSize: 12,
 			},
+			lineStyle: {
+				width: 2,
+			},
 		},
 	};
 
@@ -53,6 +56,10 @@ class LineChart {
 		this.chartValue.series.itemStyle.color = colorToHex(value) as string;
 	}
 
+	lineWidth(width: number) {
+		this.chartValue.series.lineStyle.width = width;
+	}
+
 	xLabel(label: string[]) {
 		this.chartValue.xAxis.data = label;
 	}
@@ -65,6 +72,7 @@ class LineChart {
 		this.chartValue.series.label.show = false;
 		this.chartValue.series.label.fontSize = 12;
 		this.chartValue.series.itemStyle.color = '#1677FF';
+		this.chartValue.series.lineStyle.width = 2;
 		this.chartValue.xAxis.data = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 		this.chartValue.series.data = [150, 230, 218, 135, 147, 259, 224];
 	}
