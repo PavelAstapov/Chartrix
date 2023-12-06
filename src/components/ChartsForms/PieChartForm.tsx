@@ -7,16 +7,16 @@ import { v4 as uuidv4 } from 'uuid';
 import { BarChartStore } from '../../stores';
 import { colorToHex } from '../../utils/helpers/colorToHex';
 
-export const BarChartForm = () => {
+export const PieChartForm = () => {
 	const { Text } = Typography;
 	const [form] = Form.useForm();
 	const [showLabelOptions, setShowLabelOptions] = useState<boolean>(false);
 	const [barColor, setBarColor] = useState<string>(BarChartStore.chartValue.series.itemStyle.color);
 
 	const initialValue = {
-		data: BarChartStore.chartValue.xAxis.data.map((item, index) => ({
+		data: PieChartStore.chartValue.xAxis.data.map((item, index) => ({
 			name: item,
-			series: BarChartStore.chartValue.series.data[index].value,
+			series: PieChartStore.chartValue.series.data[index].value,
 		})),
 	};
 
@@ -61,7 +61,7 @@ export const BarChartForm = () => {
 				<Typography.Title level={2} className="text-sm text-gray-200 font-bold mb-3">
 					General settings:
 				</Typography.Title>
-				<Space className="flex justify-between w-full">
+				{/* <Space className="flex justify-between w-full">
 					<Text className="text-white text-base">Show line labels: </Text>
 					<Form.Item name="showLabel" className="mb-0" valuePropName="checked">
 						<Switch
@@ -72,8 +72,8 @@ export const BarChartForm = () => {
 							}}
 						/>
 					</Form.Item>
-				</Space>
-				{showLabelOptions && (
+				</Space> */}
+				{/* {showLabelOptions && (
 					<Space className="flex justify-between w-full mt-4">
 						<Text className="text-white text-base">Line label font size: </Text>
 						<Form.Item name="lineFontSize" className="mb-0">
@@ -87,9 +87,9 @@ export const BarChartForm = () => {
 							/>
 						</Form.Item>
 					</Space>
-				)}
+				)} */}
 				<Space className="flex justify-between w-full mt-4">
-					<Text className="text-white text-base">Default bar color: </Text>
+					<Text className="text-white text-base">Default pie color: </Text>
 					<Form.Item name="lineColor" labelAlign="right" className="mb-0">
 						<ColorPicker
 							value={BarChartStore.chartValue.series.itemStyle.color}

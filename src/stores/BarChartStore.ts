@@ -14,18 +14,61 @@ class BarChart {
 		xAxis: {
 			type: 'category',
 			data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-			// axisLabel: {
-			// 	overflow: 'break',
-			// 	width: 100,
-			// 	interval: 0,
-			// 	lineHeight: 20,
-			// },
+			axisLabel: {
+				overflow: 'break',
+				width: 100,
+				interval: 0,
+				lineHeight: 20,
+			},
 		},
 		yAxis: {
 			type: 'value',
 		},
 		series: {
-			data: [120, 200, 150, 80, 70, 110, 130],
+			data: [
+				{
+					value: 120,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 200,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 150,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 80,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 70,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 110,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+				{
+					value: 130,
+					itemStyle: {
+						color: '#1677FF',
+					},
+				},
+			],
 			type: 'bar',
 			itemStyle: {
 				color: '#1677FF',
@@ -58,7 +101,7 @@ class BarChart {
 		this.chartValue.xAxis.data = label;
 	}
 
-	seriesData(data: number[]) {
+	seriesData(data: any[]) {
 		this.chartValue.series.data = data;
 	}
 
@@ -67,7 +110,50 @@ class BarChart {
 		this.chartValue.series.label.fontSize = 12;
 		this.chartValue.series.itemStyle.color = '#1677FF';
 		this.chartValue.xAxis.data = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-		this.chartValue.series.data = [150, 230, 218, 135, 147, 259, 224];
+		this.chartValue.series.data = [
+			{
+				value: 120,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 200,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 150,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 80,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 70,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 110,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+			{
+				value: 130,
+				itemStyle: {
+					color: '#1677FF',
+				},
+			},
+		];
 	}
 }
 
