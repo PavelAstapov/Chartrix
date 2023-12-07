@@ -10,8 +10,7 @@ import { colorToHex } from '../../utils/helpers/colorToHex';
 export const PieChartForm = () => {
 	const { Text } = Typography;
 	const [form] = Form.useForm();
-	const [showLabelOptions, setShowLabelOptions] = useState<boolean>(false);
-	// const [barColor, setBarColor] = useState<string>(PieChartStore.chartValue.series.itemStyle.color);
+	const [showLineOptions, setShowLineOptions] = useState<boolean>(false);
 
 	const initialValue = {
 		data: PieChartStore.chartValue.series.data.map((item, index) => ({
@@ -42,14 +41,21 @@ export const PieChartForm = () => {
 
 	const onReset = () => {
 		form.resetFields();
-		setShowLabelOptions(false);
+		setShowLineOptions(false);
 	};
 
 	return (
 		<Form
 			form={form}
 			name="chart-data"
-			initialValues={{ ...initialValue, showLabel: false, lineFontSize: 12, lineWidth: 2 }}
+			initialValues={{
+				...initialValue,
+				isInside: true,
+				lineFontSize: 16,
+				lineWidth: 2,
+				labelSymbol: '%',
+				labelLineWidth: 1,
+			}}
 			autoComplete="off"
 			onValuesChange={getValue}
 			className="px-6"
@@ -58,46 +64,59 @@ export const PieChartForm = () => {
 				<Typography.Title level={2} className="text-sm text-gray-200 font-bold mb-3">
 					General settings:
 				</Typography.Title>
-				{/* <Space className="flex justify-between w-full">
-					<Text className="text-white text-base">Show line labels: </Text>
-					<Form.Item name="showLabel" className="mb-0" valuePropName="checked">
+				<Space className="flex justify-between w-full">
+					<Text className="text-white text-base">Label is inside: </Text>
+					<Form.Item name="isInside" className="mb-0" valuePropName="checked">
 						<Switch
-							defaultChecked={false}
+							defaultChecked
 							onChange={(e) => {
-								BarChartStore.showLabel(e);
-								setShowLabelOptions(e);
+								PieChartStore.labelInside(e);
+								setShowLineOptions(!e);
 							}}
 						/>
 					</Form.Item>
-				</Space> */}
-				{/* {showLabelOptions && (
+				</Space>
+				<Space className="flex justify-between w-full mt-4">
+					<Text className="text-white text-base">Label font size:</Text>
+					<Form.Item name="lineFontSize" className="mb-0">
+						<InputNumber
+							max={30}
+							min={10}
+							onChange={(e) => {
+								PieChartStore.labelFontSize(e as number);
+							}}
+							placeholder="Font size"
+						/>
+					</Form.Item>
+				</Space>
+				<Space className="flex justify-between w-full mt-4">
+					<Text className="text-white text-base">Label symbol:</Text>
+					<Form.Item name="labelSymbol" className="mb-0">
+						<Input
+							className="max-w-[90px]"
+							onChange={(e) => {
+								PieChartStore.labelSymbol(e.currentTarget.value);
+							}}
+							maxLength={10}
+							placeholder="Label symbol"
+						/>
+					</Form.Item>
+				</Space>
+				{showLineOptions && (
 					<Space className="flex justify-between w-full mt-4">
-						<Text className="text-white text-base">Line label font size: </Text>
-						<Form.Item name="lineFontSize" className="mb-0">
+						<Text className="text-white text-base">Label line width:</Text>
+						<Form.Item name="labelLineWidth" className="mb-0">
 							<InputNumber
-								max={30}
-								min={10}
+								max={10}
+								min={1}
 								onChange={(e) => {
-									BarChartStore.labelFontSize(e as number);
+									PieChartStore.labelLineWidth(e as number);
 								}}
 								placeholder="Font size"
 							/>
 						</Form.Item>
 					</Space>
-				)} */}
-				{/* <Space className="flex justify-between w-full mt-4">
-					<Text className="text-white text-base">Default pie color: </Text>
-					<Form.Item name="lineColor" labelAlign="right" className="mb-0">
-						<ColorPicker
-							value={PieChartStore.chartValue.series.itemStyle.color}
-							onChange={(e) => {
-								BarChartStore.lineColor(e);
-								setBarColor(colorToHex(e) as string);
-							}}
-							disabledAlpha
-						/>
-					</Form.Item>
-				</Space> */}
+				)}
 			</Space>
 			<Typography.Title level={2} className="text-sm text-gray-200 font-bold mb-3">
 				Chart data:
@@ -111,7 +130,7 @@ export const PieChartForm = () => {
 									<Input maxLength={30} placeholder="Series" />
 								</Form.Item>
 								<Form.Item {...restField} name={[name, 'series']} className="mb-0">
-									<InputNumber placeholder="Value" />
+									<InputNumber min={0} placeholder="Value" />
 								</Form.Item>
 								<Form.Item {...restField} name={[name, 'barColor']} labelAlign="right" className="mb-0">
 									<ColorPicker disabledAlpha />

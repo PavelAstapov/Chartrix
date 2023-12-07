@@ -28,12 +28,16 @@ class PieChart {
 			radius: '90%',
 			legendHoverLink: true,
 			labelLine: {
+				length: 30,
 				length2: 150,
+				lineStyle: {
+					width: 1,
+				},
 			},
 			label: {
 				show: true,
 				position: 'inside',
-				formatter: '{c}',
+				formatter: '{c}%',
 				fontSize: 16,
 				fontWeight: 'bolder',
 			},
@@ -82,13 +86,22 @@ class PieChart {
 		makeAutoObservable(this);
 	}
 
-	// showLabel(isShow: boolean) {
-	// 	this.chartValue.series.label.show = isShow;
-	// }
+	labelInside(isInside: boolean) {
+		this.chartValue.series.label.position = isInside ? 'inside' : 'outside';
+		this.chartValue.series.radius = isInside ? '90%' : '80%';
+	}
 
-	// labelFontSize(size: number) {
-	// 	this.chartValue.series.label.fontSize = size;
-	// }
+	labelFontSize(size: number) {
+		this.chartValue.series.label.fontSize = size;
+	}
+
+	labelSymbol(symbol: string) {
+		this.chartValue.series.label.formatter = `{c}${symbol}`;
+	}
+
+	labelLineWidth(width: number) {
+		this.chartValue.series.labelLine.lineStyle.width = width;
+	}
 
 	// lineColor(value: any) {
 	// 	this.chartValue.series.itemStyle.color = colorToHex(value) as string;
@@ -99,9 +112,11 @@ class PieChart {
 	}
 
 	reset() {
-		// this.chartValue.series.label.show = false;
-		// this.chartValue.series.label.fontSize = 12;
-		// this.chartValue.series.itemStyle.color = '#1677FF';
+		this.chartValue.series.label.position = 'inside';
+		this.chartValue.series.radius = '90%';
+		this.chartValue.series.label.fontSize = 16;
+		this.chartValue.series.label.formatter = '{c}%';
+		this.chartValue.series.labelLine.lineStyle.width = 1;
 		this.chartValue.series.data = [
 			{
 				value: 300,
