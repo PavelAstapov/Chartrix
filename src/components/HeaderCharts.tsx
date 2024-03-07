@@ -16,7 +16,7 @@ export const HeaderCharts = ({ title }: Props) => {
 
 		createEl.href = document.querySelector('canvas')?.toDataURL(`image/${e.key}`, 1.0) as string;
 
-		createEl.download = 'download-this-canvas';
+		createEl.download = `Chart-${e.key}-${Date.now()}`;
 
 		createEl.click();
 		createEl.remove();
@@ -109,7 +109,7 @@ export const HeaderCharts = ({ title }: Props) => {
 				<Dropdown menu={menuProps}>
 					<Button type="primary" size="large">
 						<Space>
-							Download as
+							Download
 							<DownOutlined />
 						</Space>
 					</Button>
